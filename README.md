@@ -10,7 +10,7 @@ The homepage serves as the main dashboard, showcasing **NASA's upcoming events**
 ## 2. Exoplanet Details Page
 
 ![Planet Details](./2.jpg)<br>
-This screen provides detailed information about a selected **exoplanet**, pulling data from **NASA’s Exoplanet Archive**. In addition to scientific facts, the page features a **web view storytelling mode**, offering an engaging narrative about the exoplanet's history and characteristics. Users can also test their knowledge through **AI-generated quizzes**, tailored to the specific exoplanet they're exploring, fostering interactive learning.
+This screen provides detailed information about a selected **exoplanet**, pulling data from **Eyes on Exoplanets** NASA's resource. In addition to scientific facts, the page features a **web view storytelling mode**, offering an engaging narrative about the exoplanet's history and characteristics. Users can also test their knowledge through **AI-generated quizzes**, tailored to the specific exoplanet they're exploring, fostering interactive learning.
 
 ---
 
