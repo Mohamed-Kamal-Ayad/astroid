@@ -3,10 +3,18 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, StatusBar, StyleSheet } from 'react-native';
 
+import { db } from '@/core/useFirebase';
 import type { RootStackParamList } from '@/navigation';
-import { Button, Text, TimerIcon, TouchableOpacity, View } from '@/ui';
+import {
+  ActivityIndicator,
+  Button,
+  Text,
+  TimerIcon,
+  TouchableOpacity,
+  View,
+} from '@/ui';
 
-import { questions } from './data/questions';
+import type { QuestionType } from './data/questions';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'QuizQuestions'>;
 
@@ -51,6 +59,27 @@ export const QuizQuestions = ({ navigation }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [score, setScore] = useState(0);
 
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchQuestions = async () => {
+    try {
+      const querySnapshot = await db.collection('quizQuestions');
+      const fetchedQuestions = await querySnapshot.get();
+      setQuestions(
+        fetchedQuestions.docs.map(doc => doc.data() as QuestionType),
+      );
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching questions: ', error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleAnswerSelection = (answerIndex: number) => {
@@ -90,45 +119,49 @@ export const QuizQuestions = ({ navigation }: Props) => {
           }}
         />
 
-        <View className="mt-8">
-          <Text className="text-center text-base font-bold text-[#48CAE4]">
-            Questions {currentQuestionIndex + 1} of {questions.length}
-          </Text>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#48CAE4" />
+        ) : (
+          <View className="mt-8">
+            <Text className="text-center text-base font-bold text-[#48CAE4]">
+              Questions {currentQuestionIndex + 1} of {questions.length}
+            </Text>
 
-          <Text className="mt-4 w-[75%] self-center text-center text-lg font-bold text-white">
-            {currentQuestion.question}
-          </Text>
+            <Text className="mt-4 w-[75%] self-center text-center text-lg font-bold text-white">
+              {currentQuestion.question}
+            </Text>
 
-          <View className="my-8 space-y-4">
-            {currentQuestion.options.map((option, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => handleAnswerSelection(index)}
-                style={{
-                  backgroundColor:
-                    selectedAnswer === index ? '#0E1438' : 'white',
-                }}
-                className="rounded-3xl border-2 border-white py-4"
-              >
-                <Text
-                  className="text-center text-lg font-bold"
+            <View className="my-8 space-y-4">
+              {currentQuestion.options.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleAnswerSelection(index)}
                   style={{
-                    color: selectedAnswer === index ? 'white' : 'black',
+                    backgroundColor:
+                      selectedAnswer === index ? '#0E1438' : 'white',
                   }}
+                  className="rounded-3xl border-2 border-white py-4"
                 >
-                  {option}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+                  <Text
+                    className="text-center text-lg font-bold"
+                    style={{
+                      color: selectedAnswer === index ? 'white' : 'black',
+                    }}
+                  >
+                    {option}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
 
-          <Button
-            label="Next"
-            variant="outline"
-            disabled={selectedAnswer === null}
-            onPress={handleNextQuestion}
-          />
-        </View>
+            <Button
+              label="Next"
+              variant="outline"
+              disabled={selectedAnswer === null}
+              onPress={handleNextQuestion}
+            />
+          </View>
+        )}
       </View>
     </ImageBackground>
   );

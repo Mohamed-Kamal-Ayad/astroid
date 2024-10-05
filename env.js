@@ -73,6 +73,9 @@ const client = z.object({
 
   // ADD YOUR CLIENT ENV VARS HERE
   API_URL: z.string(),
+  FIREBASE_API_KEY: z.string(),
+  FIREBASE_APP_ID: z.string(),
+  FIREBASE_MESSAGING_SENDER_ID: z.number(),
 });
 
 const buildTime = z.object({
@@ -94,6 +97,9 @@ const _clientEnv = {
 
   // ADD YOUR ENV VARS HERE TOO
   API_URL: process.env.API_URL,
+  FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+  FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+  FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
 };
 
 /**
