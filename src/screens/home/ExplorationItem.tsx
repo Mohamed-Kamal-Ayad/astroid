@@ -6,9 +6,10 @@ import type { ExplorationType } from './data/explorations';
 
 export type Props = {
   item: ExplorationType;
+  onPress: (id: number) => void;
 };
 
-export const ExplorationItem = ({ item }: Props) => (
+export const ExplorationItem = ({ item, onPress }: Props) => (
   <View className="flex flex-col justify-center rounded-3xl bg-[#0E1438] px-6 pb-4 pt-6">
     <Image source={require('@/ui/images/planet.png')} />
 
@@ -16,7 +17,10 @@ export const ExplorationItem = ({ item }: Props) => (
     <Text className="w-[120px] text-xs text-white">{item.excerpt}</Text>
 
     <View className="mt-2 items-end">
-      <TouchableOpacity className="self-right rounded-full bg-[#0A528B] p-2">
+      <TouchableOpacity
+        className="self-right rounded-full bg-[#0A528B] p-2"
+        onPress={() => onPress(item.id)}
+      >
         <PlayIcon color="white" />
       </TouchableOpacity>
     </View>

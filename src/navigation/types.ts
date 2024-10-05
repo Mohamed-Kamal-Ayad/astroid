@@ -1,8 +1,15 @@
 import type { RouteProp as NRouteProp } from '@react-navigation/native';
 
-import type { AuthStackParamList } from './AuthNavigator';
-
-export type RootStackParamList = AuthStackParamList;
+export type RootStackParamList = {
+  Onboarding: undefined;
+  App: undefined;
+  Planet: { id: number };
+  PlanetExplore: { id: number };
+  Quiz: undefined;
+  QuizWeek: undefined;
+  QuizQuestions: undefined;
+  QuizFinish: { score: number; total: number };
+};
 
 declare global {
   namespace ReactNavigation {

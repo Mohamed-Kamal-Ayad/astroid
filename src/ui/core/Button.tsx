@@ -18,12 +18,12 @@ type BVariant = {
 export const buttonVariants: BVariant = {
   defaults: {
     container:
-      'flex-row items-center justify-center rounded-full px-12 py-3 my-2',
+      'flex-row items-center justify-center rounded-full px-6 py-3 my-2',
     label: 'text-[16px] font-medium text-white',
     indicator: 'text-white h-[30px]',
   },
   primary: {
-    container: 'bg-black',
+    container: 'bg-[#0E1438] border-2 border-white',
     label: '',
     indicator: 'text-white',
   },
@@ -43,6 +43,8 @@ interface Props extends TouchableOpacityProps {
   variant?: VariantName;
   label?: string;
   loading?: boolean;
+  containerClassName?: string;
+  labelClassName?: string;
 }
 
 export const Button = ({
@@ -50,6 +52,8 @@ export const Button = ({
   loading = false,
   variant = 'primary',
   disabled = false,
+  containerClassName = '',
+  labelClassName = '',
   ...props
 }: Props) => {
   return (
@@ -59,6 +63,7 @@ export const Button = ({
     ${buttonVariants.defaults.container}
      ${buttonVariants[variant].container}
      ${disabled ? 'opacity-50' : ''}
+     ${containerClassName}
     `}
       {...props}
     >
@@ -75,6 +80,7 @@ export const Button = ({
           className={`
           ${buttonVariants.defaults.label}
            ${buttonVariants[variant].label}
+           ${labelClassName}
           `}
         >
           {label}

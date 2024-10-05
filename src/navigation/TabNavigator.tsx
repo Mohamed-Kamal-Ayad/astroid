@@ -1,9 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import type { RouteProp } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { ComponentType } from 'react';
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, ImageBackground, StyleSheet } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 
 import { Favorites, Home, Profile, Quiz } from '@/screens';
@@ -85,7 +86,10 @@ export const TabNavigator = () => {
   };
 
   return (
-    <>
+    <ImageBackground
+      source={require('@/ui/images/background.png')}
+      style={style.cover}
+    >
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarInactiveTintColor: '#C2C4C8',
@@ -139,7 +143,7 @@ export const TabNavigator = () => {
           ...{ transform: [{ translateX }], width: indicatorWidth },
         }}
       />
-    </>
+    </ImageBackground>
   );
 };
 
@@ -151,5 +155,10 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     height: 5,
     borderRadius: 2,
+  },
+  cover: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
   },
 });

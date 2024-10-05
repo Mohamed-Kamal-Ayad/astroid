@@ -26,7 +26,7 @@ export const EventItem = ({ item }: Props) => (
       <View className="flex flex-col items-start space-y-4">
         <EventBadge />
         <Text className="text-base font-semibold text-white">{item.name}</Text>
-        <Text className="text-white">Timer</Text>
+        <Text className="text-white">0:1:22:33</Text>
       </View>
 
       <Image source={require('@/ui/images/event-image.png')} />

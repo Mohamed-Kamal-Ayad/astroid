@@ -15,7 +15,7 @@
     "type-check": "tsc  --noemit",
     "lint:translations": "eslint ./src/translations/ --fix --ext .json",
     "install-maestro": "curl -Ls 'https://get.maestro.mobile.dev' | bash",
-    "e2e-test": "maestro test .maestro/ -e APP_ID=com.obytes.development"
+    "e2e-test": "maestro test .maestro/ -e APP_ID=com.scaffolding"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.7",
@@ -44,9 +44,13 @@
     "react-native-screens": "^3.24.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^13.11.0",
+    "react-native-webview": "^13.12.3",
+    "react-native-youtube-iframe": "^2.3.0",
     "react-query-kit": "^1.4.6",
     "zod": "^3.22.1",
-    "zustand": "^4.4.1"
+    "zustand": "^4.4.1",
+    "@react-native-firebase/app": "^17.4.0",
+    "@react-native-firebase/database": "^17.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
